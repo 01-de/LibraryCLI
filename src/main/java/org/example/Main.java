@@ -1,6 +1,7 @@
 package org.example;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 
 abstract class Publication {
@@ -163,6 +164,66 @@ class Newspaper extends Publication implements Printable {
     }
 }
 
+
+class Library {
+    private List<Publication> publications = new ArrayList<>();
+
+    public void addPublication(Publication pub) {
+        publications.add(pub);
+    }
+
+    public void listPublication() {
+        if (publications.isEmpty()) {
+            System.out.println("Catalog is empty");
+        } else {
+            for (Publication p : publications) {
+                System.out.println(p);
+            }
+        }
+    }
+
+    public void searchByAuthor(String query) {
+        boolean found = false;
+        for (Publication p : publications) {
+            if (p.getAuthor().equalsIgnoreCase(query) || p.getTitle().equalsIgnoreCase(query)) {
+                System.out.println(p);
+                found = true;
+            }
+        }
+        if (!found) {
+            System.out.println("The typed author or title not founded!");
+        }
+    }
+
+
+    /* public void deletePublication(String title, author) {
+
+     */
+
+}
+
+class Main {
+    public static void main(String[] args) {
+        Library library = new Library();
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("Library CLI by 01-de");
+            System.out.println("1: Add new publication");
+            System.out.println("2: List of all publications");
+            System.out.println("3: Search by author or title");
+            System.out.println("4: Total number of publications");
+            System.out.println("5: Exit");
+
+            int option = scanner.nextInt();
+
+            switch (option) {
+                case 1:
+                    System.out.println("");
+            }
+        }
+    }
+}
 
 
 
