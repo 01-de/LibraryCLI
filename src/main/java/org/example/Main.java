@@ -42,7 +42,7 @@ abstract class Publication {
 
     @Override
     public String toString() {
-        return getType() + "{title='" + title + "', author='" + author + "', year=" + year + "}";
+        return getType() + "{title='" + title + "', author='" + author + "', year=" + year;
     }
 
     @Override
@@ -166,7 +166,7 @@ class Newspaper extends Publication implements Printable {
 
 
 class Library {
-    private List<Publication> publications = new ArrayList<>();
+    private final List<Publication> publications = new ArrayList<>();
 
     public void addPublication(Publication pub) {
         publications.add(pub);
@@ -182,7 +182,7 @@ class Library {
         }
     }
 
-    public void searchByAuthor(String query) {
+    public void searchByQuery(String query) {
         boolean found = false;
         for (Publication p : publications) {
             if (p.getAuthor().equalsIgnoreCase(query) || p.getTitle().equalsIgnoreCase(query)) {
@@ -216,10 +216,69 @@ class Main {
             System.out.println("5: Exit");
 
             int option = scanner.nextInt();
-
+            scanner.nextLine();
             switch (option) {
                 case 1:
-                    System.out.println("");
+                    System.out.println("Add new publication menu:");
+                    System.out.println("1 - Book, 2 - Journal, 3 - Newspaper");
+                    int type = scanner.nextInt();
+                    scanner.nextLine();
+                    System.out.println("Type title: ");
+                    String title = scanner.nextLine();
+                    scanner.nextLine();
+                    System.out.println("Type author: ");
+                    String author = scanner.nextLine();
+                    scanner.nextLine();
+
+                    System.out.println("Enter year: ");
+                    int year = scanner.nextInt();
+                    scanner.nextLine();
+                    if (type == 1) {
+                        System.out.println("Enter ISBN: ");
+                        String ISBN = scanner.nextLine();
+                        scanner.nextLine();
+                        library.addPublication(new Book(title, author, year, ISBN));
+                    } else if (type == 2) {
+                        System.out.println("Enter Issue Number: ");
+                        int issueNumber = scanner.nextInt();
+                        scanner.nextLine();
+                        library.addPublication(new Magazine(title, author, year, issueNumber));
+                    } else if (type == 3) {
+                        System.out.println("Enter a publication day (for example 'Monday')");
+                        String publicationDay = scanner.nextLine();
+                        scanner.nextLine();
+                        library.addPublication(new Newspaper(title, author, year, publicationDay));
+                    } else {
+                        System.out.println("Invalid publication type");
+                    }
+
+                    break;
+
+                case 2:
+                    System.out.println("List of all publications:");
+                    library.listPublication();
+                    break;
+
+                case 3:
+                    System.out.println("Search by author or title:");
+                    System.out.println("Enter author or title: ");
+                    String query = scanner.nextLine();
+                    scanner.nextLine();
+                    library.searchByQuery(query);
+                    break;
+
+                case 4:
+                    System.out.println("Total number of publications: " + Publication.getPublicationCount());
+                    break;
+
+                case 5:
+                    System.out.println("Exit...");
+                    return;
+
+                default:
+                    System.out.println("Invalid option please choose between 1-5");
+
+
             }
         }
     }
