@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 
-abstract class Publication {
+abstract class Publication implements Printable {
     private String title;
     private String author;
     private int year;
@@ -181,12 +181,16 @@ class Library {
             }
         }
     }
+    public void print() {
+
+    }
 
     public void searchByQuery(String query) {
         boolean found = false;
         for (Publication p : publications) {
             if (p.getAuthor().equalsIgnoreCase(query) || p.getTitle().equalsIgnoreCase(query)) {
-                System.out.println(p);
+                p.printDetails();
+                System.out.println();
                 found = true;
             }
         }
@@ -225,10 +229,8 @@ class Main {
                     scanner.nextLine();
                     System.out.println("Type title: ");
                     String title = scanner.nextLine();
-                    scanner.nextLine();
                     System.out.println("Type author: ");
                     String author = scanner.nextLine();
-                    scanner.nextLine();
 
                     System.out.println("Enter year: ");
                     int year = scanner.nextInt();
@@ -236,7 +238,6 @@ class Main {
                     if (type == 1) {
                         System.out.println("Enter ISBN: ");
                         String ISBN = scanner.nextLine();
-                        scanner.nextLine();
                         library.addPublication(new Book(title, author, year, ISBN));
                     } else if (type == 2) {
                         System.out.println("Enter Issue Number: ");
@@ -246,7 +247,6 @@ class Main {
                     } else if (type == 3) {
                         System.out.println("Enter a publication day (for example 'Monday')");
                         String publicationDay = scanner.nextLine();
-                        scanner.nextLine();
                         library.addPublication(new Newspaper(title, author, year, publicationDay));
                     } else {
                         System.out.println("Invalid publication type");
