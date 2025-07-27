@@ -34,4 +34,18 @@ public class Magazine extends Publication implements Printable {
         System.out.println("Year: " + getYear());
         System.out.println("Issue Number: " + issueNumber);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Magazine other = (Magazine) obj;
+        return issueNumber == other.issueNumber;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 31 * issueNumber;
+        return result;
+    }
 }

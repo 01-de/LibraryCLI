@@ -35,4 +35,18 @@ public class Newspaper extends Publication implements Printable {
         System.out.println("Year: " + getYear());
         System.out.println("Publication Day: " + publicationDay);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Newspaper other = (Newspaper) obj;
+        return (publicationDay != null ? publicationDay.equals(other.publicationDay) : other.publicationDay == null);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 31 * (publicationDay != null ? publicationDay.hashCode() : 0);
+        return result;
+    }
 }

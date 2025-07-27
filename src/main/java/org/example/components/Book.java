@@ -1,5 +1,7 @@
 package org.example.components;
 
+import java.util.Objects;
+
 public class Book extends Publication implements Printable {
     private String ISBN;
 
@@ -33,5 +35,19 @@ public class Book extends Publication implements Printable {
         System.out.println("Author: " + getAuthor());
         System.out.println("Year: " + getYear());
         System.out.println("ISBN: " + ISBN);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book other = (Book) o;
+        return (ISBN != null ? ISBN.equals(other.ISBN) : other.ISBN == null);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 31 * (ISBN != null ? ISBN.hashCode() : 0);
+        return result;
     }
 }

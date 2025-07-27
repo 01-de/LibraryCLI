@@ -62,7 +62,7 @@ class Main {
                     System.out.println("Enter author or title: ");
                     String query = scanner.nextLine();
                     scanner.nextLine();
-                    library.searchByQuery(query);
+                    library.searchByAuthor(query);
                     break;
 
                 case 4:
