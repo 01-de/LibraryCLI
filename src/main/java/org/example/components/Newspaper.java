@@ -40,13 +40,15 @@ public class Newspaper extends Publication implements Printable {
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
+        if (!super.equals(obj)) return false;
         Newspaper other = (Newspaper) obj;
         return (publicationDay != null ? publicationDay.equals(other.publicationDay) : other.publicationDay == null);
     }
 
     @Override
     public int hashCode() {
-        int result = 31 * (publicationDay != null ? publicationDay.hashCode() : 0);
+        int result = super.hashCode();
+        result = 31 * result + (publicationDay != null ? publicationDay.hashCode() : 0);
         return result;
     }
 }

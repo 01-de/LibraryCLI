@@ -13,7 +13,7 @@ class Main {
             System.out.println("Library CLI by 01-de");
             System.out.println("1: Add new publication");
             System.out.println("2: List of all publications");
-            System.out.println("3: Search by author or title");
+            System.out.println("3: Search by author");
             System.out.println("4: Total number of publications");
             System.out.println("5: Exit");
 

@@ -39,13 +39,15 @@ public class Magazine extends Publication implements Printable {
     public boolean equals(Object obj) {
         if (this == obj) return true;
         if (obj == null || getClass() != obj.getClass()) return false;
+        if (!super.equals(obj)) return false;
         Magazine other = (Magazine) obj;
         return issueNumber == other.issueNumber;
     }
 
     @Override
     public int hashCode() {
-        int result = 31 * issueNumber;
+        int result = super.hashCode();
+        result = 31 * result + issueNumber;
         return result;
     }
 }

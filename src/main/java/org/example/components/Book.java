@@ -41,13 +41,15 @@ public class Book extends Publication implements Printable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
         Book other = (Book) o;
         return (ISBN != null ? ISBN.equals(other.ISBN) : other.ISBN == null);
     }
 
     @Override
     public int hashCode() {
-        int result = 31 * (ISBN != null ? ISBN.hashCode() : 0);
+        int result = super.hashCode();
+        result = 31 * result + (ISBN != null ? ISBN.hashCode() : 0);
         return result;
     }
 }
